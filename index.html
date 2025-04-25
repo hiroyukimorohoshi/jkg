@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>じゃんけん</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="ja">
+  <meta charset="utf-8">
+  <title>じゃんけんゲーム</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    #state{
+      font-weight:boid;
+      color:red;
+      margin:10px 0;
+    }
+    #gu{
+      background-color:pink;
+    }
+    #cho{
+      background-color:yellow;
+    }
+    #pa{
+      background-color:#00ffff;
+    }
+    #reset{
+     background-color:#00ff00; 
+    }
+    h1{
+      background-color:blue;
+      color:white;
+      width:22%;
+    }
+    body{
+      background-color:#ccffcc;
+    }
+    </style>
+  </head>
+<body>
+  <h1>じゃんけんゲーム</h1>
+  <div>相手：<span id="cpu"></span></div>
+  <div id="state">最初はグー！じゃんけん・・・</div>  
+  <div>自分：<span id="player"></span></div>
+  
+  <button id="gu">グー</button>
+  <button id="cho">チョキ</button>
+  <button id="pa">パー</button>
+  <button id="reset">リセット</button>
+  <div>----------------------------------------</div>
+  <div>勝ち：<span id="win">0</span>回</div>
+  <div>負け：<span id="lose">0</span>回</div>  
+  
+  <!--<script src="main.js"></script> -->
+  <script>
+    const state=document.getElementById("state");
+const cpu=document.getElementById("cpu");
+const gu=document.getElementById("gu");
+const cho=document.getElementById("cho");
+const pa=document.getElementById("pa");
+const player=document.getElementById("player");
+const reset=document.getElementById("reset");
+const win=document.getElementById("win");
+const lose=document.getElementById("lose");
+const jans=["グー","チョキ","パー"];
+let playjan;
+let cpuja;
+let winCount=0;
+let loseCount=0;
+
+start();
+
+//グーボタン押下
+gu.addEventListener("click",()=>{
+  player.textContent=jans[0];
+  playjan=jans[0];
+  cpuja=jans[Object.keys(jans)[Math.floor(Math.random() * Object.keys(jans).length)]];
+  cpu.textContent=cpuja;
+  result();
+})
+//チョキボタン押下
+cho.addEventListener("click",()=>{
+  player.textContent=jans[1];
+  playjan=jans[1];
+  cpuja=jans[Object.keys(jans)[Math.floor(Math.random() * Object.keys(jans).length)]];
+  cpu.textContent=cpuja;
+  result();
+})
+//パーボタン押下
+pa.addEventListener("click",()=>{
+  player.textContent=jans[2];
+  playjan=jans[2];
+  cpuja=jans[Object.keys(jans)[Math.floor(Math.random() * Object.keys(jans).length)]];
+  cpu.textContent=cpuja;
+  result();
+})
+//リセットボタン押下
+reset.addEventListener("click",()=>{
+  start();
+  state.textContent="最初はグー！じゃんけん・・・";
+  player.textContent="";
+  cpu.textContent="";
+})
+
+function result(){
+  if(playjan===cpuja){
+    state.textContent="あいこで・・・"
+  }else if(playjan===jans[0]&&cpuja===jans[1]||playjan===jans[1]&&cpuja===jans[2]||playjan===jans[2]&&cpuja===jans[0]){
+    state.textContent="勝ち";
+    display()
+    winCount++;
+    win.textContent=winCount;
+  }else{
+    state.textContent="負け";
+    display()
+    loseCount++;
+    lose.textContent=loseCount;
+  }
+}
+function start(){
+  gu.disabled=false;
+  cho.disabled=false;
+  pa.disabled=false;
+  reset.disabled=true;
+}
+function display(){
+  gu.disabled=true;
+  cho.disabled=true;
+  pa.disabled=true;
+  reset.disabled=false;
+}
+
+  </script>  
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
